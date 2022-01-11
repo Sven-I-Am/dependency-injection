@@ -9,7 +9,7 @@ monolog:
         nested:
             type: stream
             path: "%kernel.logs_dir%/log.info"
-            level: debug
+            level: alert
             formatter: monolog.formatter.json
         console:
             type: console

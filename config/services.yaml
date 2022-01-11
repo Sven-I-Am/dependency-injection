@@ -17,6 +17,8 @@ services:
 
     App\Service\Transform $toCaps: '@App\Service\ToCaps'
     App\Service\Transform $toDash: '@App\Service\ToDash'
+
+
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'

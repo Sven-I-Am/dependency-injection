@@ -12,6 +12,6 @@ class Logger
 
     public function log(string $string)
     {
-        $this->logger->log('INFO', $string);
+        $this->logger->log('ALERT', $string);
     }
 }

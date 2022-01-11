@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Input;
+use App\Form\InputType;
 use App\Service\Transform;
 use App\Service\Logger;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
@@ -24,13 +27,22 @@ class HomepageController extends AbstractController
     /**
      * @route("/", "homepage")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $string = 'hello, this is your homepagecontroller speaking';
-        $output1 = $this->toCaps->transform($string);
-        $output2 = $this->toDash->transform($string);
-        $this->logger->log($string);
-        return $this->render('base.html.twig', [
+        $input = new Input;
+        $input->setInput('');
+        $output1 = $output2 = $input->getInput();
+        $form = $this->createForm(InputType::class, $input);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $input = $form->getData();
+            $string = $input->getInput();
+            $output1 = $this->toCaps->transform($string);
+            $output2 = $this->toDash->transform($string);
+            $this->logger->log($string);
+        }
+        return $this->renderForm('base.html.twig', [
+            'form' => $form,
             'output1' => $output1,
             'output2' => $output2,
         ]);

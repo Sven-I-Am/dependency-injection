@@ -90,7 +90,13 @@ Logos are added on a project basis, I have them stored in a separate folder loca
     - I adjusted the Logger class to use the Loggerinterface through its constructor
     - Made adjustments to the HomepageController to call the class Logger through the constructor
     - Passing the $string to the Logger to log to the log.info file (I adjusted the path in `.\config\dev\monolog.yaml` as well as `.\config\prod\monolog.yaml`)
-    - it still writes more than just the $string to the loginfo file, will ask coach Tim after lunch what that is about.
+      - ![log path](src/Assets/logPath.png)
+    - it still writes more than just the $string to the log.info file, will ask coach Tim after lunch what that is about.
+    - After lunch I went to choach Tim about my Logger logging all app level messages in the log.info
+    - After some searching and brainstorming I figured out I could play around with the log LEVELS to filter out the messages
+    - I now log my $string at the 'ALERT' level and in the monolog.yaml file I set the log levels to ALERT as well
+    - It appears to be working since I now only get the $string logged in my log.info file
+    - 
 
 ## What I learned from this exercise
 <!--here you can write anything from a short summary on the subject of the exercise, a readable description of the new skills/knowledge you acquire, to an in depth clarification. As long as it helps you retain what you learned, or easily find the information when working on future projects-->
