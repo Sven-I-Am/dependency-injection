@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\Master;
 use App\Entity\Input;
 use App\Form\InputType;
 use App\Service\Transform;
@@ -37,11 +38,12 @@ class HomepageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $input = $form->getData();
             $string = $input->getInput();
+            $master = new Master($this->toCaps, $this->toDash, $this->logger, $string);
             $transform= $input->getTransform();
             if($transform === 'caps'){
-                $output = $this->toCaps->transform($string);
+                $output = $master->toCaps();
             } else {
-                $output = $this->toDash->transform($string);
+                $output = $master->toDash();
             }
             $this->logger->log($string);
         }
