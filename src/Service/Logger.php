@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Service;
-
 use Psr\Log\LoggerInterface;
-
 class Logger
 {
-    public function log(LoggerInterface $logger, string $string)
+    private LoggerInterface $logger;
+    public function __construct(LoggerInterface $logger)
     {
-        $logger->log('info', $string);
+        $this->logger = $logger;
+    }
+
+    public function log(string $string)
+    {
+        $this->logger->log('INFO', $string);
     }
 }

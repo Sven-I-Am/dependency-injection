@@ -8,8 +8,13 @@ class ToCaps implements Transform
     {
         $input = str_split($string);
         $output = [];
-        for($i=0; $i<count($input); $i+=2){
-            array_push($output, strtoupper($input[$i]));
+        for($i=0; $i<count($input); $i++){
+            if($i%2===0){
+                array_push($output, strtoupper($input[$i]));
+            } else {
+                array_push($output, $input[$i]);
+            }
+
         }
         return implode("", $output);
     }

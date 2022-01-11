@@ -12,10 +12,11 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     # makes classes in src/ available to be used as services
-    App\Log\CustomLogger:
-        arguments: [ '@logger' ]
-        tags:
-            - { name: log.info, channel: app }
+    App\Service\ToDash: ~
+    App\Service\ToCaps: ~
+
+    App\Service\Transform $toCaps: '@App\Service\ToCaps'
+    App\Service\Transform $toDash: '@App\Service\ToDash'
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'

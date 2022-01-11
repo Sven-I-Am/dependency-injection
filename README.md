@@ -75,6 +75,22 @@ Logos are added on a project basis, I have them stored in a separate folder loca
         - `git push -u origin main`
       - Now I can finally get back to this exercise
     - This time I'll be instantiating my interface and classes as part of the src/Service folder
+    - First I created:
+      - interface Transform
+      - class ToCaps
+      - class ToDash
+      - class Logger
+    - Then I created a HomepageController using `symfony console make:controller`
+    - In that controller I added `USE App\Service\Transform` with the other USE lines
+    - In the class I then passed the created classes to the constructor using the Transform type declaration
+    - I had to add the following lines to my `./config/services.yaml` file in order to allow the autowiring of the service/interface
+      - ![service.yaml](src/Assets/services.yaml.png)
+    - In the controller I passed a test $string to the methods and got this output:
+      - ![test output](src/Assets/testOutput.png)
+    - I adjusted the Logger class to use the Loggerinterface through its constructor
+    - Made adjustments to the HomepageController to call the class Logger through the constructor
+    - Passing the $string to the Logger to log to the log.info file (I adjusted the path in `.\config\dev\monolog.yaml` as well as `.\config\prod\monolog.yaml`)
+    - it still writes more than just the $string to the loginfo file, will ask coach Tim after lunch what that is about.
 
 ## What I learned from this exercise
 <!--here you can write anything from a short summary on the subject of the exercise, a readable description of the new skills/knowledge you acquire, to an in depth clarification. As long as it helps you retain what you learned, or easily find the information when working on future projects-->
