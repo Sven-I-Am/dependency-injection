@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Controller\Master;
 use App\Entity\Input;
 use App\Form\InputType;
 use App\Service\Transform;
-use App\Service\Logger;
+
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,19 +18,19 @@ class HomepageController extends AbstractController
 {
     private Transform $toDash;
     private Transform $toCaps;
-    private Logger $logger;
 
-    public function __construct(Transform $toCaps, Transform $toDash, Logger $logger)
+    public function __construct(Transform $toCaps, Transform $toDash)
     {
         $this->toCaps = $toCaps;
         $this->toDash = $toDash;
-        $this->logger = $logger;
     }
     /**
      * @route("/", "homepage")
      */
     public function index(Request $request): Response
     {
+        $log = new Logger('my_logger');
+        $log->pushHandler(new StreamHandler('../var/log/log.info', Logger::ALERT));
         $input = new Input;
         $output = $input->getInput();
         $transform = $input->getTransform();
@@ -38,14 +39,14 @@ class HomepageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $input = $form->getData();
             $string = $input->getInput();
-            $master = new Master($this->toCaps, $this->toDash, $this->logger, $string);
+            $log->alert($string);
+            $master = new Master($this->toCaps, $this->toDash, $string);
             $transform= $input->getTransform();
             if($transform === 'caps'){
                 $output = $master->toCaps();
             } else {
                 $output = $master->toDash();
             }
-            $this->logger->log($string);
         }
         return $this->renderForm('base.html.twig', [
             'form' => $form,

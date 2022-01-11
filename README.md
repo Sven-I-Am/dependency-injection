@@ -104,6 +104,9 @@ Logos are added on a project basis, I have them stored in a separate folder loca
     - Will have to ask Tim about that.
     - Alright, apparently, I was supposed to build a separate Master class that calls the Transform interface and the ToDash and ToCaps classes that implement said interface
     - Then in the HomepageController I can instantiate a new Master and call its defined methods depending on the user input.
+    - At the end of the day I managed to get the Monolog logger working. since I'm no longer my own Logger class I removed the call from the Master and now log directly from the HomepageController
+    - :exclamation: I kept the file for the Logger class to keep the code available for review
+    - :tada: exercise done
 
 ## What I learned from this exercise
 <!--here you can write anything from a short summary on the subject of the exercise, a readable description of the new skills/knowledge you acquire, to an in depth clarification. As long as it helps you retain what you learned, or easily find the information when working on future projects-->
@@ -135,7 +138,7 @@ objectives they will be moved up into the timeline section and ticked off using 
   * then based on user input returns the correct transformation to the browser output :heavy_check_mark:
 
 ### Nice to have
-* Change your Logger class for Monolog. In this case you will not use your own logger class anymore.
+* Change your Logger class for Monolog. In this case you will not use your own logger class anymore. :heavy_check_mark:
 
 ## Installation Instructions
 <!--write clear instructions on how to get your project working on the user's local environment-->

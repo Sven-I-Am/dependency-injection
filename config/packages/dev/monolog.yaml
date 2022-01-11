@@ -2,7 +2,7 @@ monolog:
     handlers:
         main:
             type: stream
-            path: "%kernel.logs_dir%/log.info"
+            path: "%kernel.logs_dir%/testLog.info"
             level: alert
             channels: ["!event"]
         # uncomment to get logging in your browser
