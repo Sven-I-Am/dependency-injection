@@ -96,7 +96,12 @@ Logos are added on a project basis, I have them stored in a separate folder loca
     - After some searching and brainstorming I figured out I could play around with the log LEVELS to filter out the messages
     - I now log my $string at the 'ALERT' level and in the monolog.yaml file I set the log levels to ALERT as well
     - It appears to be working since I now only get the $string logged in my log.info file
-    - 
+    - Next I added an Entity Input and a form for that entity
+    - The HomepageController handles the form through the $request and sets the $output variables after form validation
+    - The outputs then get echoed onto the screen.
+    - I added the dropdown to select the transformation type and depending on the user's selection the input gets then rerendered through the corresponding tranformation
+    - Not sure what the exercise means when it says not to change anything in the Master class... I had to implement the if{}else{} in the HomepageController to call the correct method.
+    - Will have to ask Tim about that.
 
 ## What I learned from this exercise
 <!--here you can write anything from a short summary on the subject of the exercise, a readable description of the new skills/knowledge you acquire, to an in depth clarification. As long as it helps you retain what you learned, or easily find the information when working on future projects-->

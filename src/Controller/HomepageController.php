@@ -30,21 +30,25 @@ class HomepageController extends AbstractController
     public function index(Request $request): Response
     {
         $input = new Input;
-        $input->setInput('');
-        $output1 = $output2 = $input->getInput();
+        $output = $input->getInput();
+        $transform = $input->getTransform();
         $form = $this->createForm(InputType::class, $input);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $input = $form->getData();
             $string = $input->getInput();
-            $output1 = $this->toCaps->transform($string);
-            $output2 = $this->toDash->transform($string);
+            $transform= $input->getTransform();
+            if($transform === 'caps'){
+                $output = $this->toCaps->transform($string);
+            } else {
+                $output = $this->toDash->transform($string);
+            }
             $this->logger->log($string);
         }
         return $this->renderForm('base.html.twig', [
             'form' => $form,
-            'output1' => $output1,
-            'output2' => $output2,
+            'transform' => $transform,
+            'output' => $output,
         ]);
     }
 }

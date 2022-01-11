@@ -14,10 +14,10 @@ class Input
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $input;
+    private $input = '';
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $transform;
+    private $transform = '';
 
     public function getId(): ?int
     {
